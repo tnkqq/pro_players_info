@@ -5,6 +5,8 @@ import time
 import lxml
 import requests
 
+
+""" func to get ifno from bio table"""
 def get_player_bio(src):
     try:
         soup =BeautifulSoup(src,"lxml")
@@ -20,6 +22,8 @@ def get_player_bio(src):
 
     except:
         return("Player Bio was NOT FOUND!")
+
+"""func to get player's gear info"""
 
 def get_player_gear(src):
     try:
@@ -38,6 +42,8 @@ def get_player_gear(src):
     except:
         return("Player Gear was NOT FOUND!")
 
+""" func to get player pc specs """
+
 def get_player_pc_specs(src):
     soup =BeautifulSoup(src,"lxml")
     specs = soup.find(class_ = "center-container").find (class_ = "equipment").find(id = "pcspecs").find(class_ = "cta-boxes--list").find_all(class_ ="cta-box promo linked ext-link promo linked ext-link")
@@ -50,6 +56,7 @@ def get_player_pc_specs(src):
     return pc_specs_dict
 
     
+"""func to get info from page"""
 
 def get_page_info (nickname):
 
