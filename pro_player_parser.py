@@ -59,15 +59,20 @@ def get_player_pc_specs(src):
 """func to get info from page"""
 
 def get_page_info (nickname):
-
+    global player_bio_dict,player_gear_dict,player_specs_dict
     url = f"https://prosettings.net/players/{nickname}/"
     src = requests.get(url).text
+    
 
     player_bio_dict = get_player_bio(src)
+    player_bio_dict["nickname"] = nickname
+    
     player_gear_dict = get_player_gear(src)
     player_specs_dict = get_player_pc_specs(src)
-    return player_bio_dict,player_gear_dict,player_specs_dict
-    
-print(get_page_info("https://prosettings.net/players/s1mple/"))
 
-    
+
+
+get_page_info("pio")
+
+
+
