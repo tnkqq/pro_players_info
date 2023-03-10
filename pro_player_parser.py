@@ -69,12 +69,15 @@ def get_page_info (nickname):
     player_bio_dict =dict()
     if get_player_bio(src) is not None:
         player_bio_dict = get_player_bio(src)
-    
         player_bio_dict['nickname'] = nickname
     else:
-        return print("Player havent bio...")
+        return None
+    
     player_gear_dict = get_player_gear(src)
     player_specs_dict = get_player_pc_specs(src)
+    
+
+
 
 def get_all_players_from_page(url):
     
