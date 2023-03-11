@@ -34,9 +34,7 @@ def get_player_gear(src):
             gear_name = box_item.find("h4").find("a").text
             
             gear_table_dict [box_status] =gear_name
-            
-    
-
+        
         return gear_table_dict
     except:
         return(None)
@@ -72,9 +70,10 @@ def get_page_info (nickname):
         player_bio_dict['nickname'] = nickname
     else:
         return None
-    
+    #print(player_bio_dict)
     player_gear_dict = get_player_gear(src)
     player_specs_dict = get_player_pc_specs(src)
+    return True
     
 
 

@@ -9,12 +9,10 @@ from pro_player_parser import get_page_info
 exception_list = []
 def add_player(name):
     global exception_list
-    if data_based.insert_player_in_db(name) is not None:
+    if data_based.insert_player_in_db(name) is not "ERROR":
         data_based.insert_player_in_db(name)
     else:
         exception_list.append(name)
-
-        
 
 #update data base 
 def update_data_base():
@@ -33,11 +31,17 @@ def delete_player(player):
 
 #clear all 
 
+
 #search player 
 
-delete_player("s1mple")
-add_player("s1mple")
 
+def serch_info(player):
+    return data_based.player_info(player)
+
+
+#delete_player("s1mple")
+
+#add_player("pio")
 
 
 print(f"Exception list : {exception_list}")
