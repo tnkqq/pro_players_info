@@ -51,10 +51,11 @@ def start_telebot():
 
     
 #clear all 
-
-
 if __name__ == "__main__":
-    pass
+    start_telebot()
     print(f"Exception list : {exception_list}")
 
 # update_data_base()
+
+
+

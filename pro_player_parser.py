@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-import aiohttp
-import asyncio
+# import aiohttp
+# import asyncio
 import lxml
 import requests
 import string
@@ -55,13 +55,25 @@ def get_player_pc_specs(src):
     except:
         return None
         
-
+def get_player_social_network(src):
+    try:
+        soup = BeautifulSoup(src,"lxml")
+        social = soup.find(class_ = "player-bio").find(class_ = "social").find("ul").find_all("li")
+       
+        social_dict = dict()
+        for item in social:
+            name=item.find("a").text
+            link=item.find("a").get("href")
+            social_dict [name] = link
+        return social_dict
+    except:
+        return None
     
 """func to get info from page"""
 
 def get_page_info (nickname):
     nickname = nickname.replace(" ","-").lower()
-    global player_bio_dict,player_gear_dict,player_specs_dict
+    global player_bio_dict,player_gear_dict,player_specs_dict,player_social_network_dict
     url = f"https://prosettings.net/players/{nickname}/"
     src = requests.get(url).text
     player_bio_dict =dict()
@@ -73,9 +85,9 @@ def get_page_info (nickname):
     #print(player_bio_dict)
     player_gear_dict = get_player_gear(src)
     player_specs_dict = get_player_pc_specs(src)
+    player_social_network_dict = get_player_social_network(src)
     return True
     
-
 
 
 def get_all_players_from_page(url):
@@ -95,30 +107,22 @@ def get_all_players_from_page(url):
 
 def get_players_list():
     
-
     url = f"https://prosettings.net/players/"
     src = requests.get(url).text
     soup = BeautifulSoup(src,"lxml")
     page_count = int(soup.find(class_="nav-links").find_all("a")[-2].text)
     players_list = []
 
-    
-
     for page in range (1,page_count+1):    
         
         for item in get_all_players_from_page(f"https://prosettings.net/players/page/{page}/"):
                 
-        
             players_list.append(item)
             
         print(f"page{ page } was added")
     
     return players_list
 
-
-        
-        
-        
 
 
 
